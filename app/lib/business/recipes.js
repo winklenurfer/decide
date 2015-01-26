@@ -1,3 +1,4 @@
+/*jslint node: true */
 // Logger ============================================================
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({
@@ -26,7 +27,7 @@ function reqSerializer(req) {
         body: req.body,
         params: req.params,
         query: req.query
-    }
+    };
 }
 
 // DB Models ==========================================================
@@ -85,7 +86,7 @@ function createRecipe(req, res) {
 		Recipe.find(function(err, recipes) {
 			if (err) {
 				log.error({req: req}, err);
-				res.send(err)
+				res.send(err);
 			}
 			res.json(recipes);
 		});
@@ -117,12 +118,12 @@ function updateRecipe(req, res, id) {
 			Recipe.find(function(err, recipes) {
 				if (err) {
 					log.error({req: req}, err);
-					res.send(err)
+					res.send(err);
 				}
 				res.json(recipes);
 			});
 		});
-	};
+	}
 
 	function updateOptional(optional) {
 		Recipe.findByIdAndUpdate(id, {$push: {'ingredients.optional': {$each: optional}}}, function(err, recipes) {
@@ -135,12 +136,12 @@ function updateRecipe(req, res, id) {
 			Recipe.find(function(err, recipes) {
 				if (err) {
 					log.error({req: req}, err);
-					res.send(err)
+					res.send(err);
 				}
 				res.json(recipes);
 			});
 		});
-	};
+	}
 }
 
 function deleteRecipe(req, res, id) {
@@ -156,7 +157,7 @@ function deleteRecipe(req, res, id) {
 		Recipe.find(function(err, recipes) {
 			if (err) {
 				log.error({req: req}, err);
-				res.send(err)
+				res.send(err);
 			}
 			res.json(recipes);
 		});

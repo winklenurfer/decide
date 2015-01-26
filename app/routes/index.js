@@ -28,7 +28,7 @@ module.exports = function(app) {
 	        body: req.body,
 	        params: req.params,
 	        query: req.query
-	    }
+	    };
 	}
 
 	// frontend routes =========================================================

@@ -1,3 +1,4 @@
+/*jslint node: true */
 // Logger ============================================================
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({
@@ -26,7 +27,7 @@ function reqSerializer(req) {
         body: req.body,
         params: req.params,
         query: req.query
-    }
+    };
 }
 
 // DB Models ==========================================================
@@ -82,7 +83,7 @@ function createIngredient(req, res) {
 		Ingredient.find(function(err, ingredients) {
 			if (err) {
 				log.error({req: req}, err);
-				res.send(err)
+				res.send(err);
 			}
 			res.json(ingredients);
 		});
@@ -102,7 +103,7 @@ function updateIngredient(req, res, id) {
 		Ingredient.find(function(err, ingredients) {
 			if (err) {
 				log.error({req: req}, err);
-				res.send(err)
+				res.send(err);
 			}
 			res.json(ingredients);
 		});
@@ -122,7 +123,7 @@ function deleteIngredient(req, res, id) {
 		Ingredient.find(function(err, ingredients) {
 			if (err) {
 				log.error({req: req}, err);
-				res.send(err)
+				res.send(err);
 			}
 			res.json(ingredients);
 		});
