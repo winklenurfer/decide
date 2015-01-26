@@ -1,0 +1,1 @@
+angular.module('cuisine', ['ngRoute', 'appRoutes', 'MainCtrl', 'RecipesCtrl', 'RecipesService', 'IngredientsCtrl', 'IngredientsService']);

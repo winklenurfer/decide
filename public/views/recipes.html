@@ -1,0 +1,50 @@
+<div class="text-muted">
+	<header>Recipes</header>
+</div>
+<hr>
+<div class="row">
+	<div class="col-md-5">
+		<form ng-submit="createRecipe()">
+			<div class="form-group">
+				<label>Name</label>
+				<input type="text" class="form-control text-center" placeholder="Recipe Name" ng-model="formData.name" required>
+			</div>
+			<div class="form-group">
+				<label>Category</label>
+				<select class="form-control" ng-model="formData.category" ng-options="category for category in categories" required>
+					<option value="">-- chose category --</option>
+				</select>
+			</div>
+			<label>Ingredients</label>
+			<div class="form-group">
+				<div>Required</div>
+				<select class="form-control" ng-model="formData.ingredients.required" multiple required>
+					<option ng-repeat='ingredient in ingredients | orderBy:"name"' value="{{ingredient._id}}">{{ingredient.name}}</option>
+				</select>
+				<div>Optional</div>
+				<select class="form-control" ng-model="formData.ingredients.optional" multiple>
+					<option ng-repeat='ingredient in ingredients | orderBy:"name"' value="">{{ingredient.name}}</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+	<div class="col-md-7">
+		<table class='table table-striped'>
+		    <thead>
+				<th><a href="" ng-click="predicate = 'name'; reverse=false">Name</a>&nbsp;<a href="" ng-click="predicate = '-name'; reverse=false">(^)</a></th>
+				<th><a href="" ng-click="predicate = 'category'; reverse=false">Category</a>&nbsp;<a href="" ng-click="predicate = '-category'; reverse=false">(^)</a></th>
+				<th><a href="" ng-click="predicate = 'inPantry'; reverse=true">Required</a>&nbsp;<a href="" ng-click="predicate = '-inPantry'; reverse=true">(^)</a></th>
+				<th><a href="" ng-click="predicate = 'inPantry'; reverse=true">Optional</a>&nbsp;<a href="" ng-click="predicate = '-inPantry'; reverse=true">(^)</a></th>
+		    </thead>
+		    <tbody>
+				<tr ng-repeat='recipe in recipes | orderBy:predicate:reverse'>
+					<td>{{recipe.name}}</td>
+					<td>{{recipe.category}}</td>
+					<td><p ng-repeat='required in recipe.ingredients.required'>{{ required }}</p></td>
+  					<td>{{recipe.ingredients.optional}}</td>
+				</tr>
+		    </tbody>
+		</table>
+	</div>
+</div>
