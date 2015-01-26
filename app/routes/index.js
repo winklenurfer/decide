@@ -4,7 +4,7 @@ module.exports = function(app) {
 	var bunyan = require('bunyan');
 	var log = bunyan.createLogger({
 		src: true,
-	    name: 'cuisine',
+	    name: 'decider',
 	    serializers: {
 	    	req: reqSerializer
 	    },
@@ -15,7 +15,8 @@ module.exports = function(app) {
 		    },
 		    {
 		      level: 'error',
-		      path: '/Users/adickson/log/cuisine.log'	// log ERROR and above to a file
+		      //path: '/Users/adickson/log/cuisine.log'	// log ERROR and above to a file
+              stream: process.stdout
 		    }
 		]
 	});

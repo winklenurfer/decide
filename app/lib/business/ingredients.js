@@ -13,7 +13,8 @@ var log = bunyan.createLogger({
 	    },
 	    {
 	      level: 'error',
-	      path: '/Users/adickson/log/cuisine.log'	// log ERROR and above to a file
+	      //path: '/Users/adickson/log/cuisine.log'	// log ERROR and above to a file
+          stream: process.stdout
 	    }
 	]
 });

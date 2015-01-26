@@ -1,5 +1,5 @@
 {
-  "name": "cuisine",
+  "name": "decider",
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.4.2",

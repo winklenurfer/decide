@@ -35,5 +35,5 @@ require('./app/routes/index')(app);
 
 // start app ===============================================
 app.listen(port);	
-console.log('Cuisine running on port ' + port); 			// shoutout to the user
+console.log('Decider running on port ' + port); 			// shoutout to the user
 exports = module.exports = app; 						// expose app
