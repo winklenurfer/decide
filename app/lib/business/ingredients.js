@@ -3,7 +3,7 @@
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({
 	src: true,
-    name: 'cuisine',
+    name: 'decider',
     serializers: {
     	req: reqSerializer
     },

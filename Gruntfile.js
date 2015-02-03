@@ -73,7 +73,7 @@ module.exports = function(grunt) {
             options: {
                 logConcurrentOutput: true
             }
-        },
+        }
 //        env: {
 //            test: {
 //                NODE_ENV: 'test'
@@ -103,7 +103,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['hook']);
 
     //Test task.
-    grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+    //grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
     // For Heroku users only.
     // Docs: https://github.com/linnovate/mean/wiki/Deploying-on-Heroku

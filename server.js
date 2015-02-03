@@ -14,9 +14,14 @@ var methodOverride = require('method-override');
 // configuration ===========================================
 	
 // config files
-var db = require('./config/db');
+if (process.env.NODE_ENV == 'production') {
+    var db = require('./config/db').production;
+    var prodPort = 80;
+} else {
+    var db = require('./config/db').development;
+}
 
-var port = process.env.PORT || 8080; // set our port
+var port = process.env.PORT || prodPort || 8080; // set our port
 mongoose.connect(db.url); // connect to our mongoDB database
 
 // get all data/stuff of the body (POST) parameters
