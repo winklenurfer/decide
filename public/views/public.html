@@ -9,10 +9,26 @@
     </div>
 </nav>
 <div class="container">
-    <table class="table table-striped">
-        <thead>Open</thead>
-        <tr
-    </table>
+    <div class="col-md-6 col-md-offset-3">
+        <table class="table table-hover">
+            <caption class="green lead text-left">Open</caption>
+            <tr class="text-center" ng-repeat="election in openElections" ng-click="openElection(election)">
+                <td class="text-left">{{election.name}}</td>
+                <td>#&nbsp;{{election.id}}</td>
+                <td class="text-right">{{election.time}}</td>
+            </tr>
+        </table>
+        <hr>
+        <table class="table table-hover">
+            <caption class="red lead text-left">Closed</caption>
+            <tr class="text-center" ng-repeat="election in closedElections" ng-click="openElection(election)">
+                <td class="text-left">{{election.name}}</td>
+                <td>#&nbsp;{{election.id}}</td>
+                <td class="text-right">{{election.time}}</td>
+            </tr>
+        </table>
+        <hr>
+    </div>
     <div class="row text-center">
         <div class="col-md-2 col-md-offset-4">
             <p><a type="button" class="btn btn-primary btn-lg" href="/create">Create</a></p>
