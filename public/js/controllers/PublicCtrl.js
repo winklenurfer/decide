@@ -11,8 +11,16 @@ angular.module('PublicCtrl', []).controller('PublicController', function($scope,
         {"name":"No Money", "id":38291, "time": "12:00 PM 01/01/15"}
     ];
 
-    $scope.openElection = function(election) {
-        $location.path('/election/' + election.id);
+    $scope.viewElection = function(election) {
+        $location.path('/election/' + election.id + '/view');
+    };
+
+    $scope.voteElection = function(election) {
+        $location.path('/election/' + election.id + '/vote');
+    };
+
+    $scope.editElection = function(election) {
+        $location.path('/election/' + election.id + '/edit');
     };
 
 });

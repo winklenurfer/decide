@@ -12,19 +12,27 @@
     <div class="col-md-6 col-md-offset-3">
         <table class="table table-hover">
             <caption class="green lead text-left">Open</caption>
-            <tr class="text-center" ng-repeat="election in openElections" ng-click="openElection(election)">
+            <tr class="text-center" ng-repeat="election in openElections">
                 <td class="text-left">{{election.name}}</td>
                 <td>#&nbsp;{{election.id}}</td>
                 <td class="text-right">{{election.time}}</td>
+                <td>
+                    <!--<div class="glyphicon glyphicon-search pointer" title="view" ng-click="viewElection(election)"></div>-->
+                    <div class="glyphicon glyphicon glyphicon-tasks pointer" title="vote" ng-click="voteElection(election)"></div>
+                    <div class="glyphicon glyphicon-pencil pointer" title="edit" ng-click="editElection(election)"></div>
+                </td>
             </tr>
         </table>
         <hr>
         <table class="table table-hover">
             <caption class="red lead text-left">Closed</caption>
-            <tr class="text-center" ng-repeat="election in closedElections" ng-click="openElection(election)">
+            <tr class="text-center" ng-repeat="election in closedElections">
                 <td class="text-left">{{election.name}}</td>
                 <td>#&nbsp;{{election.id}}</td>
                 <td class="text-right">{{election.time}}</td>
+                <td>
+                    <div class="glyphicon glyphicon-search pointer" title="view" ng-click="viewElection(election)"></div>
+                </td>
             </tr>
         </table>
         <hr>
