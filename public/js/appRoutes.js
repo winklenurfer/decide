@@ -13,6 +13,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'PublicController'
         })
 
+        .when('/create', {
+            templateUrl: 'views/create.html',
+            controller: 'CreateController'
+        })
+
 		.when('/recipes', {
 			templateUrl: 'views/recipes.html',
 			controller: 'RecipesController'

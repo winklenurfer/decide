@@ -9,3 +9,7 @@ tr {
 [ng-click] {
     cursor: pointer;
 }
+
+.add-option {
+    margin-top: 5px;
+}
