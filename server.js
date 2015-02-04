@@ -15,14 +15,13 @@ var methodOverride = require('method-override');
 	
 // config files
 if (process.env.NODE_ENV == 'production') {
-    var db = require('./config/db').production;
-    var prodPort = 80;
+    var config = require('./config/config-prod');
 } else {
-    var db = require('./config/db').development;
+    var config = require('./config/config-dev');
 }
 
-var port = process.env.PORT || prodPort || 8080; // set our port
-mongoose.connect(db.url); // connect to our mongoDB database
+var port = process.env.PORT || config.port || 8080; // set our port
+mongoose.connect(config.db.url); // connect to our mongoDB database
 
 // get all data/stuff of the body (POST) parameters
 app.use(bodyParser.json()); // parse application/json 
