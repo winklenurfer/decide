@@ -1,5 +1,5 @@
 {
-  "name": "decider",
+  "name": "decide",
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.4.2",

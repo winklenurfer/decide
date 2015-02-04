@@ -4,7 +4,7 @@ module.exports = function(app) {
 	var bunyan = require('bunyan');
 	var log = bunyan.createLogger({
 		src: true,
-	    name: 'decider',
+	    name: 'decide',
 	    serializers: {
 	    	req: reqSerializer
 	    },

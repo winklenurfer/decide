@@ -1,4 +1,4 @@
-# Decider - Let something else do the thinking for you.
+# Decide - Let something else do the thinking for you.
 
 This is a MEAN Stack application that provides both the interface and backend for a election creation and execution system.
 
