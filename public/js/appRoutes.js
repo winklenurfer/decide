@@ -20,14 +20,13 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
         // TODO: Add this page.
         .when('/election/:electionID/view', {
-            templateUrl: 'views/view.html',
+            templateUrl: 'views/result.html',
             controller: 'ResultController'
         })
 
-        // TODO: Add this page.
         .when('/election/:electionID/vote', {
             templateUrl: 'views/vote.html',
-            controller: 'ElectionController'
+            controller: 'VoteController'
         })
 
         // TODO: Add this page.
