@@ -11,13 +11,14 @@
 </nav>
 <div class="container">
     <div class="col-md-3 col-md-offset-3">
-        <p class="green lead">{{election.name}}</p>
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="option in election.options">{{option}}</li>
-        </ul>
+        <h3 class="lead green">{{election.name}}<br><small>{{election.description}}</small></h3>
+
+        <div class="list-group">
+            <p class="list-group-item" ng-repeat="option in election.options">{{option}}</p>
+        </div>
     </div>
     <div class="col-md-3">
-        <p class="lead blue">Votes</p>
+        <h3 class="lead blue">Votes</h3>
         <h1 class="text-center well">{{votes}}</h1>
     </div>
     <div class="col-md-6 col-md-offset-3">

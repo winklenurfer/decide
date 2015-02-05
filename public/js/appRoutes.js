@@ -4,9 +4,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
 		// home page
 		.when('/', {
-			templateUrl: 'views/home.html',
-			controller: 'HomeController'
+			templateUrl: 'views/public.html',
+			controller: 'PublicController'
 		})
+
+        .when('/home', {
+            templateUrl: 'views/home.html',
+            controller: 'HomeController'
+        })
 
         .when('/public', {
             templateUrl: 'views/public.html',

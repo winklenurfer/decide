@@ -10,12 +10,19 @@
     </div>
 </nav>
 <div class="container">
-    <div class="col-md-6 col-md-offset-3">
-        <p class="lead blue">Rank</p>
+    <div class="col-md-3 col-md-offset-3">
+        <h3 class="lead green">{{election.name}}<br><small>{{election.description}}</small></h3>
+
+        <div class="list-group">
+            <p class="list-group-item" ng-repeat="option in election.options">{{option}}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <h3 class="lead blue">Rank</h3>
         <form class="form-horizontal">
             <div class="form-group" ng-repeat="option in election.options">
                 <label class="control-label col-md-1 text-right">#{{$index + 1}}</label>
-                <div class="col-md-11">
+                <div class="col-md-10">
                     <select class="form-control" ng-options="o for o in election.options" ng-model="rank">
                     </select>
                 </div>
