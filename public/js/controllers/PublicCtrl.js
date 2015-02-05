@@ -12,7 +12,7 @@ angular.module('PublicCtrl', []).controller('PublicController', function($scope,
     ];
 
     $scope.viewElection = function(election) {
-        $location.path('/election/' + election.id + '/view');
+        $location.path('/election/' + election.id + '/result');
     };
 
     $scope.voteElection = function(election) {

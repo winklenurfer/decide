@@ -18,8 +18,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'CreateController'
         })
 
-        // TODO: Add this page.
-        .when('/election/:electionID/view', {
+        .when('/election/:electionID/result', {
             templateUrl: 'views/result.html',
             controller: 'ResultController'
         })

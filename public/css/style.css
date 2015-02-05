@@ -2,14 +2,34 @@
 	padding-top: 70px; 
 }*/
 
-.pointer {
-    cursor: pointer;
-}
-
 [ng-click] {
     cursor: pointer;
 }
 
+.elections-glyphicon:hover {
+    cursor: pointer;
+    color: black;
+}
+
 .add-option {
     margin-top: 5px;
+}
+
+.elections {
+    color: dimgrey;
+}
+
+.result {
+    color: dimgrey;
+}
+
+.result-0 {
+    color: green;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.result-dropped {
+    color: red;
+    font-weight: 300;
 }

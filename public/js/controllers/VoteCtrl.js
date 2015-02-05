@@ -4,7 +4,7 @@ angular.module('VoteCtrl', []).controller('VoteController', function($scope, $lo
         "name":"Awesome Election",
         "id":12345,
         "time": "11:35 PM 02/03/15",
-        "options": ["Pizza", "Sandwich", "Chinese", "Taco", "Vegie"]
+        "options": ["Pizza", "Sandwich", "Chinese", "Taco", "Vegetarian"]
     };
 
     $scope.viewElection = function(election) {

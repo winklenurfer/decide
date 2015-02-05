@@ -1,1 +1,1 @@
-angular.module('decide', ['ngRoute', 'appRoutes', 'HomeCtrl', 'PublicCtrl', 'CreateCtrl', 'VoteCtrl', 'RecipesCtrl', 'RecipesService', 'IngredientsCtrl', 'IngredientsService']);
+angular.module('decide', ['ngRoute', 'appRoutes', 'HomeCtrl', 'PublicCtrl', 'CreateCtrl', 'VoteCtrl', 'ResultCtrl', 'RecipesCtrl', 'RecipesService', 'IngredientsCtrl', 'IngredientsService']);
