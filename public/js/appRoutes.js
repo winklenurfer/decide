@@ -33,21 +33,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'VoteController'
         })
 
-        // TODO: Add this page.
         .when('/election/:electionID/edit', {
             templateUrl: 'views/edit.html',
             controller: 'EditController'
         })
-
-		.when('/recipes', {
-			templateUrl: 'views/recipes.html',
-			controller: 'RecipesController'
-		})
-
-		.when('/ingredients', {
-			templateUrl: 'views/ingredients.html',
-			controller: 'IngredientsController'	
-		});
 
 	$locationProvider.html5Mode(true);
 
