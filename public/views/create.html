@@ -4,36 +4,30 @@
             <div class="form-group">
                 <label class="control-label col-md-3" for="electionName">Name</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="electionName" placeholder="Humpday Happy Hour">
+                    <input type="text" class="form-control" id="electionName" placeholder="Humpday Happy Hour" ng-model="formData.name" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3" for="electionDescription">Description</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="electionDescription" placeholder="Where should we go for drinks on Wednesday?">
+                    <input type="text" class="form-control" id="electionDescription" placeholder="Where should we go for drinks on Wednesday?" ng-model="formData.description" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">Options</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="option1" placeholder="Option 1">
+                    <input type="text" class="form-control" id="candidate1" placeholder="Candidate 1" ng-model="formData.candidates.0" required>
+                </div>
+                <div class="col-md-9 col-md-offset-3 add-option" ng-repeat="candidate in candidatesArray">
+                    <input type="text" class="form-control" id="candidate{{$index + 2}}" placeholder="{{candidate.placeholder}} {{$index + 2}}" ng-model="formData.candidates[$index+1]" required>
                 </div>
                 <div class="col-md-9 col-md-offset-3 add-option">
-                    <input type="text" class="form-control" id="option2" placeholder="Option 2">
-                </div>
-                <div class="col-md-9 col-md-offset-3 add-option">
-                    <input type="text" class="form-control" id="option3" placeholder="Option 3">
-                </div>
-                <div class="col-md-9 col-md-offset-3 add-option">
-                    <input type="text" class="form-control" id="option4" placeholder="Option 4">
-                </div>
-                <div class="col-md-9 col-md-offset-3 add-option">
-                    <input type="text" class="form-control" id="option5" placeholder="Option 5">
+                    <button type="button" ng-click="addCandidate()">+</button>
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary col-md-3 col-md-offset-3">Generate</button>
-                <a href="/public" class="btn btn-default col-md-3 col-md-offset-3" role="button">Cancel</a>
+                <button type="submit" class="btn btn-primary col-md-3 col-md-offset-3" ng-click="createElection()">Generate</button>
+                <button type="button" class="btn btn-default col-md-3 col-md-offset-3" ng-click="reset()">Reset</a>
             </div>
         </form>
     </div>

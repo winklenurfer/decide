@@ -2,7 +2,7 @@
 require('newrelic');
 
 // includes ================================================
-ingredientsBusiness = require('./app/lib/business/ingredients');
+electionsBusiness = require('./app/lib/business/elections_business.js');
 
 // modules =================================================
 var express        = require('express');
@@ -33,7 +33,7 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 
 // routes ==================================================
 // pass our application into our routes
-require('./app/routes/ingredients')(app);
+require('./app/routes/elections_routes')(app);
 require('./app/routes/recipes')(app);
 require('./app/routes/index')(app);
 
