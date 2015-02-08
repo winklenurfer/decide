@@ -1,7 +1,7 @@
 module.exports = {
 
     db: {
-        url: 'mongodb://cuisine:cnz34mxk@proximus.modulusmongo.net:27017/nemaP2uj'
+        url: 'mongodb://127.0.0.1:27017'
     },
 
     port: 80
