@@ -34,6 +34,7 @@ function reqSerializer(req) {
 var Election = require('../../models/elections_model');
 
 // Functions ==========================================================
+// Gets all Elections
 function getElections(req, res) {
 	// Logging
 	log.info({req: req});
@@ -50,6 +51,7 @@ function getElections(req, res) {
 	});
 }
 
+// Gets single Election by _id
 function getElectionById(req, res, id) {
 	// Logging
 	log.info({req: req});
@@ -66,6 +68,7 @@ function getElectionById(req, res, id) {
 	});
 }
 
+// Creates single Election
 function createElection(req, res) {
 	// Logging
 	log.info({req: req});
@@ -99,6 +102,7 @@ function createElection(req, res) {
 	});
 }
 
+//TODO - edit view needs to be able to close an election
 function updateElectionById(req, res, id) {
 	// Logging
 	log.info({req: req});
@@ -119,6 +123,7 @@ function updateElectionById(req, res, id) {
 	});
 }
 
+//TODO - edit view needs to be able to delete an election
 function deleteElectionById(req, res, id) {
 	// Logging
 	log.info({req: req});
