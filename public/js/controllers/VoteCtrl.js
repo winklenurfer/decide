@@ -19,16 +19,4 @@ angular.module('VoteCtrl', []).controller('VoteController', function($scope, $lo
 
     $scope.loadElectionById($routeParams.electionID);
 
-    $scope.viewElection = function(election) {
-        $location.path('/election/' + election.id + '/view');
-    };
-
-    $scope.voteElection = function(election) {
-        $location.path('/election/' + election.id + '/vote');
-    };
-
-    $scope.editElection = function(election) {
-        $location.path('/election/' + election.id + '/edit');
-    };
-
 });

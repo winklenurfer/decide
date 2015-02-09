@@ -86,18 +86,17 @@ function createElection(req, res) {
         candidates: candidates,
         createdAt: new Date()
     },
-    function(err) {
+    function(err, election) {
 		if (err) {
 			log.error({req: req}, err);
 			res.send(err);
 		}
-
-		Election.find(function(err, elections) {
+        Election.findById(election._id, function(err, election) {
 			if (err) {
 				log.error({req: req}, err);
 				res.send(err);
 			}
-			res.json(elections);
+			res.json(election);
 		});
 	});
 }
