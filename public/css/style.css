@@ -6,17 +6,25 @@
     cursor: pointer;
 }
 
-.elections-glyphicon:hover {
-    cursor: pointer;
-    color: black;
-}
-
 .add-option {
     margin-top: 5px;
 }
 
 .elections {
     color: dimgrey;
+}
+
+.elections-name {
+    font-weight: 500;
+}
+
+.elections-description {
+    font-weight: 300;
+}
+
+.elections-glyphicon:hover {
+    cursor: pointer;
+    color: black;
 }
 
 .result {

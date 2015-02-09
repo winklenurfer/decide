@@ -5,7 +5,8 @@ var ElectionSchema   = new Schema({
 	name: String,
     description: String,
 	running: Boolean,
-    candidates: {}
+    candidates: [{candidate: String, percent: Number, dropped: Boolean}],
+    createdAt: Date
 }, {
 	collection: 'elections'
 });

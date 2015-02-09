@@ -38,7 +38,7 @@ function getElections(req, res) {
 	// Logging
 	log.info({req: req});
 
-	// use mongoose to get all ingredients in the database
+	// use mongoose to get all elections in the database
 	Election.find(function(err, elections) {
 		// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 		if (err) {
@@ -46,7 +46,7 @@ function getElections(req, res) {
 			res.send(err);
 		}
 
-		res.json(elections); // return all ingredients in JSON format
+		res.json(elections); // return all elections in JSON format
 	});
 }
 
@@ -54,7 +54,7 @@ function getElectionById(req, res, id) {
 	// Logging
 	log.info({req: req});
 
-	// use mongoose to get an ingredient by id
+	// use mongoose to get an election by id
 	Election.findById(id, function(err, election) {
 		// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 		if (err) {
@@ -62,21 +62,28 @@ function getElectionById(req, res, id) {
 			res.send(err);
 		}
 
-		res.json(election); // return the ingredient in JSON format
+		res.json(election); // return the election in JSON format
 	});
 }
 
 function createElection(req, res) {
 	// Logging
 	log.info({req: req});
-// TODO - manipulate candidates before entry to add {candidate: String, percent: Number, dropped: Boolean} and put that back into the model
+
+    var candidates = [];
+
+    for (var candidate in req.body.candidates) {
+        candidates.push({'candidate':req.body.candidates[candidate], 'percent':0, 'dropped':false});
+    }
+
 	Election.create({
         name: req.body.name,
         description: req.body.description,
-        running: req.body.running,
-        candidates: req.body.candidates
+        running: true,
+        candidates: candidates,
+        createdAt: new Date()
     },
-    function(err, elections) {
+    function(err) {
 		if (err) {
 			log.error({req: req}, err);
 			res.send(err);
@@ -96,7 +103,7 @@ function updateElectionById(req, res, id) {
 	// Logging
 	log.info({req: req});
 
-	Election.findByIdAndUpdate(id, req.body, function(err, elections) {
+	Election.findByIdAndUpdate(id, req.body, function(err) {
 		if (err) {
 			log.error({req: req}, err);
 			res.send(err);
@@ -116,7 +123,7 @@ function deleteElectionById(req, res, id) {
 	// Logging
 	log.info({req: req});
 
-	Election.findByIdAndRemove(id, function(err, elections) {
+	Election.findByIdAndRemove(id, function(err) {
 		if (err) {
 			log.error({req: req}, err);
 			res.send(err);
