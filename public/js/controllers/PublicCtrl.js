@@ -28,15 +28,15 @@ angular.module('PublicCtrl', []).controller('PublicController', function($scope,
     $scope.loadElections();
 
     $scope.viewElection = function(election) {
-        $location.path('/election/' + election.id + '/result');
+        $location.path('/election/' + election._id + '/result');
     };
 
     $scope.voteElection = function(election) {
-        $location.path('/election/' + election.id + '/vote');
+        $location.path('/election/' + election._id + '/vote');
     };
 
     $scope.editElection = function(election) {
-        $location.path('/election/' + election.id + '/edit');
+        $location.path('/election/' + election._id + '/edit');
     };
 
 });
