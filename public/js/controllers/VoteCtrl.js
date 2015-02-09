@@ -1,12 +1,19 @@
-angular.module('VoteCtrl', []).controller('VoteController', function($scope, $location) {
+angular.module('VoteCtrl', []).controller('VoteController', function($scope, $location, $http, $routeParams) {
 
-	$scope.election = {
-        "name":"Awesome Election",
-        "description":"This election is going to be amazing!",
-        "id":12345,
-        "time": "11:35 PM 02/03/15",
-        "candidates": ["Pizza", "Sandwich", "Chinese", "Taco", "Vegetarian"]
+	$scope.election = {};
+
+    $scope.loadElectionById = function(election_id) {
+        $http.get('/api/elections/' + election_id)
+            .success(function(data) {
+                $scope.election = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
     };
+
+    $scope.loadElectionById($routeParams.electionID);
 
     $scope.viewElection = function(election) {
         $location.path('/election/' + election.id + '/view');
