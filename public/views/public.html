@@ -5,7 +5,7 @@
             <tr class="text-center elections" ng-repeat="election in openElections">
                 <td class="text-left elections-name">{{election.name}}</td>
                 <td class="elections-description">{{election.description}}</td>
-                <td class="text-right">{{election.createdAt | date:"h:mma MM/dd/yy"}}</td>
+                <td class="text-right">{{election.createdAt | date:"h:mma&nbsp;MM/dd/yy"}}</td>
                 <td>
                     <!--<div class="glyphicon glyphicon-search pointer" title="view" ng-click="viewElection(election)"></div>-->
                     <div class="glyphicon glyphicon glyphicon-tasks elections-glyphicon" title="vote" ng-click="voteElection(election)"></div>
@@ -19,7 +19,7 @@
             <tr class="text-center elections" ng-repeat="election in closedElections">
                 <td class="text-left elections-name">{{election.name}}</td>
                 <td class="elections-description">{{election.description}}</td>
-                <td class="text-right">{{election.createdAt | date:"h:mma MM/dd/yy"}}</td>
+                <td class="text-right">{{election.createdAt | date:"h:mma&nbsp;MM/dd/yy"}}</td>
                 <td>
                     <div class="glyphicon glyphicon-search elections-glyphicon" title="view" ng-click="viewElection(election)"></div>
                 </td>
