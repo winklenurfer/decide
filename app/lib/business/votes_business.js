@@ -73,17 +73,9 @@ function createVote(req, res) {
 	// Logging
 	log.info({req: req});
 
-    var candidates = [];
-
-    for (var candidate in req.body.candidates) {
-        candidates.push({'candidate':req.body.candidates[candidate], 'percent':0, 'dropped':false});
-    }
-
 	Vote.create({
-        name: req.body.name,
-        description: req.body.description,
-        running: true,
-        candidates: candidates,
+        election_id: req.body.election_id,
+        candidates: req.body.candidates,
         createdAt: new Date()
     },
     function(err, vote) {
@@ -101,7 +93,7 @@ function createVote(req, res) {
 	});
 }
 
-//TODO - edit view needs to be able to close an vote
+//TODO Future: users should be able to edit their votes while election is still open
 function updateVoteById(req, res, id) {
 	// Logging
 	log.info({req: req});
@@ -122,7 +114,7 @@ function updateVoteById(req, res, id) {
 	});
 }
 
-//TODO - edit view needs to be able to delete an vote
+//TODO Future: users should be able to remove their vote while election is still open
 function deleteVoteById(req, res, id) {
 	// Logging
 	log.info({req: req});

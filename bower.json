@@ -5,6 +5,7 @@
     "bootstrap": "latest",
     "angular": "latest",
     "angular-route": "latest",
-    "bootstrap-switch": "~3.0.2"
+    "bootstrap-switch": "~3.0.2",
+    "angular-dragdrop": "~1.0.11"
   }
 }

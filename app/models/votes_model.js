@@ -2,10 +2,8 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var VoteSchema   = new Schema({
-	name: String,
-    description: String,
-	running: Boolean,
-    candidates: [{candidate: String, percent: Number, dropped: Boolean}],
+	election_id: String,
+    candidates: [],
     createdAt: Date
 }, {
 	collection: 'votes'
