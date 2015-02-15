@@ -1,6 +1,6 @@
 /*jslint node: true */
 // Logger ============================================================
-log = require('../../../config/logger.js');
+var log = require('../../../config/logger.js');
 
 // DB Models ==========================================================
 var Vote = require('../../models/votes_model');
@@ -9,7 +9,7 @@ var Vote = require('../../models/votes_model');
 // Gets all Votes
 function getVotes(req, res) {
     // Logging
-    log.info('getVotes', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
+    log.info('getVotes:', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
 	// use mongoose to get all votes in the database
 	Vote.find(function(err, votes) {
@@ -60,7 +60,7 @@ function getVoteByElectionId(req, res, election_id) {
 // Creates single Vote
 function createVote(req, res) {
 	// Logging
-    log.info('createVote', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
+    log.info('createVote:', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
 	Vote.create({
         election_id: req.body.election_id,
@@ -74,7 +74,7 @@ function createVote(req, res) {
 		}
         Vote.findById(vote._id, function(err, vote) {
 			if (err) {
-				log.error({req: req}, err);
+                log.error('createVote - findById:', {body: req.body, error: err});
 				res.send(err);
 			}
 			res.json(vote);

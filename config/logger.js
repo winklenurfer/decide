@@ -1,9 +1,10 @@
 var winston = require('winston');
+winston.emitErrs = true;
 
 // Set up logger
 var customColors = {
     trace: 'white',
-    debug: 'green',
+    debug: 'blue',
     info: 'green',
     warn: 'yellow',
     error: 'red',
@@ -21,12 +22,23 @@ var logger = new(winston.Logger)({
         fatal: 5
     },
     transports: [
-        new(winston.transports.Console)({
-            colorize: true,
-            timestamp: true
+        new winston.transports.File({
+            level: 'info',
+            filename: './logs/all-logs.log',
+            handleExceptions: true,
+            json: true,
+            maxsize: 5242880, //5MB
+            maxFiles: 5,
+            colorize: false
+        }),
+        new winston.transports.Console({
+            level: 'debug',
+            handleExceptions: true,
+            json: false,
+            colorize: true
         })
-        // new (winston.transports.File)({ filename: 'somefile.log' })
-    ]
+    ],
+    exitOnError: false
 });
 
 winston.addColors(customColors);
@@ -53,3 +65,8 @@ logger.log = function (level, msg) {
  */
 
 module.exports = logger;
+module.exports.stream = {
+    write: function(message){
+        logger.info(message);
+    }
+};

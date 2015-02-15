@@ -1,6 +1,9 @@
 // NewRelic ================================================
 require('newrelic');
 
+// Logger
+var log = require('./config/logger.js');
+
 // includes ================================================
 electionsBusiness = require('./app/lib/business/elections_business.js');
 voteBusiness = require('./app/lib/business/votes_business.js');
@@ -32,6 +35,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-f
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 
+log.debug("Overriding 'Express' logger");
+app.use(require('morgan')("combined",{ "stream": log.stream }));
+
 // routes ==================================================
 // pass our application into our routes
 require('./app/routes/elections_routes')(app);
@@ -40,6 +46,6 @@ require('./app/routes/recipes')(app);
 require('./app/routes/index')(app);
 
 // start app ===============================================
-app.listen(port);	
-console.log('Decide running on port ' + port); 			// shoutout to the user
+app.listen(port);
+log.info('Decide running on port ' + port);
 exports = module.exports = app; 						// expose app
