@@ -1,34 +1,6 @@
 /*jslint node: true */
 // Logger ============================================================
-var bunyan = require('bunyan');
-var log = bunyan.createLogger({
-	src: true,
-    name: 'decide',
-    serializers: {
-    	req: reqSerializer
-    },
-    streams: [
-		{
-	      level: 'info',
-	      stream: process.stdout	// log INFO and above to stdout
-	    },
-	    {
-	      level: 'error',
-	      //path: '/Users/adickson/log/cuisine.log'	// log ERROR and above to a file
-          stream: process.stdout
-	    }
-	]
-});
-// Excluded headers: req.headers
-function reqSerializer(req) {
-    return {
-        method: req.method,
-        url: req.url,
-        body: req.body,
-        params: req.params,
-        query: req.query
-    };
-}
+log = require('../../../config/logger.js');
 
 // DB Models ==========================================================
 var Vote = require('../../models/votes_model');
@@ -36,14 +8,14 @@ var Vote = require('../../models/votes_model');
 // Functions ==========================================================
 // Gets all Votes
 function getVotes(req, res) {
-	// Logging
-	log.info({req: req});
+    // Logging
+    log.info('getVotes', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
 	// use mongoose to get all votes in the database
 	Vote.find(function(err, votes) {
 		// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 		if (err) {
-			log.error({req: req}, err);
+			log.error('getVotes', {body: req.body, error: err});
 			res.send(err);
 		}
 
@@ -54,13 +26,13 @@ function getVotes(req, res) {
 // Gets single Vote by _id
 function getVoteById(req, res, id) {
 	// Logging
-	log.info({req: req});
+    log.info('getVotesById', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
 	// use mongoose to get an vote by id
 	Vote.findById(id, function(err, vote) {
 		// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 		if (err) {
-			log.error({req: req}, err);
+            log.error('getVotesById', {body: req.body, error: err});
 			res.send(err);
 		}
 
@@ -71,13 +43,13 @@ function getVoteById(req, res, id) {
 // Gets Votes by election_id
 function getVoteByElectionId(req, res, election_id) {
     // Logging
-    log.info({req: req});
+    log.info('getVotesByElectionId', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
     // use mongoose to get an vote by id
     Vote.find({'election_id':election_id}, function(err, vote) {
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
-            log.error({req: req}, err);
+            log.error('getVotesByElectionId', {body: req.body, error: err});
             res.send(err);
         }
 
@@ -88,7 +60,7 @@ function getVoteByElectionId(req, res, election_id) {
 // Creates single Vote
 function createVote(req, res) {
 	// Logging
-	log.info({req: req});
+    log.info('createVote', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
 	Vote.create({
         election_id: req.body.election_id,
@@ -97,7 +69,7 @@ function createVote(req, res) {
     },
     function(err, vote) {
 		if (err) {
-			log.error({req: req}, err);
+            log.error('createVote', {body: req.body, error: err});
 			res.send(err);
 		}
         Vote.findById(vote._id, function(err, vote) {
@@ -113,11 +85,11 @@ function createVote(req, res) {
 //TODO Future: users should be able to edit their votes while election is still open
 function updateVoteById(req, res, id) {
 	// Logging
-	log.info({req: req});
+    log.info('updateVoteById', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
 	Vote.findByIdAndUpdate(id, req.body, function(err) {
 		if (err) {
-			log.error({req: req}, err);
+            log.error('updateVoteById', {body: req.body, error: err});
 			res.send(err);
 		}
 
@@ -134,11 +106,11 @@ function updateVoteById(req, res, id) {
 //TODO Future: users should be able to remove their vote while election is still open
 function deleteVoteById(req, res, id) {
 	// Logging
-	log.info({req: req});
+    log.info('deleteVoteById', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
 
 	Vote.findByIdAndRemove(id, function(err) {
 		if (err) {
-			log.error({req: req}, err);
+            log.error('deleteVoteById', {body: req.body, error: err});
 			res.send(err);
 		}
 

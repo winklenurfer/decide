@@ -1,5 +1,6 @@
 /*jslint node: true */
 // Logger ============================================================
+//TODO - Fix all logging to use winston (see votes_business)
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({
 	src: true,
