@@ -1,6 +1,3 @@
-// NewRelic ================================================
-require('newrelic');
-
 // Logger
 var log = require('./config/logger.js');
 

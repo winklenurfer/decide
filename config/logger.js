@@ -67,6 +67,6 @@ logger.log = function (level, msg) {
 module.exports = logger;
 module.exports.stream = {
     write: function(message){
-        logger.info(message);
+        logger.info(message.slice(0, -1));
     }
 };
