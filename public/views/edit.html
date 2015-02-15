@@ -1,14 +1,13 @@
 <div class="container">
     <div class="col-md-3 col-md-offset-3">
         <h3 class="lead green">{{election.name}}<br><small>{{election.description}}</small></h3>
-
         <div class="list-group">
-            <p class="list-group-item" ng-repeat="option in election.options">{{option}}</p>
+            <p class="list-group-item" ng-repeat="candidate in candidatesArray">{{candidate}}</p>
         </div>
     </div>
     <div class="col-md-3">
         <h3 class="lead blue">Votes</h3>
-        <h1 class="text-center well">{{votes}}</h1>
+        <h1 class="text-center well">{{numVotes}}</h1>
     </div>
     <div class="col-md-6 col-md-offset-3">
         <form class="form-horizontal">

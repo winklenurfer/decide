@@ -16,6 +16,7 @@ angular.module('VoteCtrl', []).controller('VoteController', function($scope, $lo
             });
     };
 
+    // Set the rank array with the candidates
     $scope.setCandidates = function(election) {
         for (var candidate in election.candidates) {
             console.log(election.candidates[candidate]);
@@ -40,6 +41,7 @@ angular.module('VoteCtrl', []).controller('VoteController', function($scope, $lo
             });
     };
 
+    // Use the routeParams to load the election by the ID
     $scope.loadElectionById($routeParams.electionID);
 
 });

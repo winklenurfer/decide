@@ -68,6 +68,23 @@ function getVoteById(req, res, id) {
 	});
 }
 
+// Gets Votes by election_id
+function getVoteByElectionId(req, res, election_id) {
+    // Logging
+    log.info({req: req});
+
+    // use mongoose to get an vote by id
+    Vote.find({'election_id':election_id}, function(err, vote) {
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            log.error({req: req}, err);
+            res.send(err);
+        }
+
+        res.json(vote); // return the vote in JSON format
+    });
+}
+
 // Creates single Vote
 function createVote(req, res) {
 	// Logging
@@ -138,6 +155,7 @@ function deleteVoteById(req, res, id) {
 module.exports = {
     getVotes: getVotes,
     getVoteById: getVoteById,
+    getVoteByElectionId: getVoteByElectionId,
     createVote: createVote,
     updateVoteById: updateVoteById,
     deleteVoteById: deleteVoteById

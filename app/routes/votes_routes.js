@@ -14,6 +14,11 @@ module.exports = function(app) {
 		votesBusiness.getVoteById(req, res, req.params.vote_id);
 	});
 
+    // Get votes by election_id
+    app.get('/api/votes/election/:election_id', function(req, res) {
+        votesBusiness.getVoteByElectionId(req, res, req.params.election_id);
+    });
+
 	 // Create new vote
 	app.post('/api/votes', function(req, res) {
         votesBusiness.createVote(req, res);
