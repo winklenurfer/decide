@@ -11,6 +11,7 @@ var app            = express();
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var morgan         = require('morgan');
 
 // configuration ===========================================
 	
@@ -33,7 +34,7 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 
 log.debug("Overriding 'Express' logger");
-app.use(require('morgan')(':remote-addr - :date - :method :status :url :response-time ms',{ "stream": log.stream }));
+app.use(morgan(':remote-addr - :date - :method :status :url :response-time ms',{ "stream": log.stream }));
 
 // routes ==================================================
 // pass our application into our routes

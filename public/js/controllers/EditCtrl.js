@@ -1,9 +1,10 @@
-angular.module('EditCtrl', []).controller('EditController', function($scope, $http, $routeParams) {
+angular.module('EditCtrl', []).controller('EditController', function($scope, $http, $routeParams, $window, $location) {
 
 	$scope.numVotes = 17;
     $scope.candidatesArray = [];
     $scope.election = {};
     $scope.votes = [];
+    $scope.electionID = $routeParams.electionID;
 
     // Loads an Election by the _id
     $scope.loadElectionById = function(election_id) {
@@ -44,6 +45,21 @@ angular.module('EditCtrl', []).controller('EditController', function($scope, $ht
             });
     };
 
+    // Delete Election by the _id
+    $scope.deleteElection = function() {
+
+        if($window.confirm('Are you sure you want to permanently delete this Election?')) {
+            $http.delete('/api/elections/' + $scope.electionID)
+                .success(function(data) {
+                    $location.path('/public');
+                    console.log(data);
+                })
+                .error(function(data) {
+                    console.log('Error: ' + data);
+                });
+        }
+    };
+
     // Set the candidates array with the candidates
     $scope.setCandidates = function(election) {
         for (var candidate in election.candidates) {
@@ -58,7 +74,7 @@ angular.module('EditCtrl', []).controller('EditController', function($scope, $ht
     }
 
     // Use the routeParams to load the election and votes by the ID
-    $scope.loadElectionById($routeParams.electionID);
-    $scope.loadVotesByElectionId($routeParams.electionID);
+    $scope.loadElectionById($scope.electionID);
+    $scope.loadVotesByElectionId($scope.electionID);
 
 });

@@ -94,7 +94,6 @@ function updateElectionById(req, res, id) {
 	});
 }
 
-//TODO - edit view needs to be able to delete an election
 function deleteElectionById(req, res, id) {
 	// Logging
     log.info('deleteElectionById:', {method: req.method, url: req.url, body: req.body, params: req.params, query: req.query});
