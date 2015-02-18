@@ -9,14 +9,13 @@
         <h3 class="lead blue text-center">Drag to Rank</h3>
         <div>
             <div ng-repeat="candidate in rank">
-                <!--<div>#{{$index+1}}:</div>-->
                 <div class="btn btn-droppable col-md-12" data-drop="true" ng-model='rank' data-jqyoui-droppable="{index: {{$index}}}">
                     <div class="btn btn-info btn-draggable col-md-12" ng-show="rank[$index]" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="rank" data-jqyoui-draggable="{index: {{$index}},animate:true}">{{rank[$index]}}</div>
                 </div>
             </div>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary col-md-4 col-md-offset-1" ng-click="createVote()">Submit</button>
+            <button type="submit" class="btn btn-primary col-md-4 col-md-offset-1" ng-click="createVote()">Vote</button>
             <a href="/public" class="btn btn-default col-md-4 col-md-offset-2" role="button">Cancel</a>
         </div>
     </div>

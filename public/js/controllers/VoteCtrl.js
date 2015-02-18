@@ -2,6 +2,7 @@ angular.module('VoteCtrl', []).controller('VoteController', function($scope, $lo
 
 	$scope.election = {};
     $scope.rank = [];
+    $scope.electionID = $routeParams.electionID;
 
     // Loads an Election by the _id
     $scope.loadElectionById = function(election_id) {
@@ -42,6 +43,6 @@ angular.module('VoteCtrl', []).controller('VoteController', function($scope, $lo
     };
 
     // Use the routeParams to load the election by the ID
-    $scope.loadElectionById($routeParams.electionID);
+    $scope.loadElectionById($scope.electionID);
 
 });
