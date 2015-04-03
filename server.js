@@ -40,7 +40,6 @@ app.use(morgan(':remote-addr - :date - :method :status :url :response-time ms',{
 // pass our application into our routes
 require('./app/routes/elections_routes')(app);
 require('./app/routes/votes_routes')(app);
-require('./app/routes/recipes')(app);
 require('./app/routes/index')(app);
 
 // start app ===============================================
