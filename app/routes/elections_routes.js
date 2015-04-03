@@ -2,6 +2,7 @@ module.exports = function(app) {
 
 	// Business
 	var electionsBusiness = require('../lib/business/elections_business');
+    var tallyBusiness = require('../lib/business/tally_business');
 
 	// Elections Routes ======================================================
 	 // Get all elections
@@ -13,6 +14,11 @@ module.exports = function(app) {
 	app.get('/api/elections/:election_id', function(req, res) {
 		electionsBusiness.getElectionById(req, res, req.params.election_id);
 	});
+
+     // Tally election results by id
+    app.get('/api/elections/tally/:election_id', function(req, res) {
+        tallyBusiness.tallyElectionResultsById(res, req.params.election_id);
+    });
 
 	 // Create new election
 	app.post('/api/elections', function(req, res) {

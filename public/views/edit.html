@@ -10,9 +10,9 @@
         <h1 class="text-center well">{{numVotes}}</h1>
     </div>
     <div class="col-md-6 col-md-offset-3">
-        <form class="form-horizontal">
+        <form class="form-horizontal" ng-submit="tallyElection()">
             <div class="form-group">
-                <button type="submit" class="btn btn-primary col-md-3 col-md-offset-2">Calculate Results</button>
+                <button type="submit" class="btn btn-primary col-md-3 col-md-offset-2">Tally Results</button>
                 <button class="btn btn-danger col-md-3 col-md-offset-2" ng-click="deleteElection()">Delete</button>
                 <!--<a href="/public" class="btn btn-default col-md-3 col-md-offset-1" role="button">Cancel</a>-->
             </div>

@@ -71,7 +71,20 @@ angular.module('EditCtrl', []).controller('EditController', function($scope, $ht
 
     $scope.setNumVotes = function(votes) {
         $scope.numVotes = votes.length;
-    }
+    };
+
+    $scope.tallyElection = function() {
+        console.log('Tallying election');
+
+        $http.get('/api/elections/tally/' + $scope.electionID)
+            .success(function(data) {
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+
+    };
 
     // Use the routeParams to load the election and votes by the ID
     $scope.loadElectionById($scope.electionID);

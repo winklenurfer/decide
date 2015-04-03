@@ -2,6 +2,7 @@ module.exports = function(app) {
 
 	// Business
 	var votesBusiness = require('../lib/business/votes_business');
+    var electionsBusiness = require('../lib/business/elections_business');
 
 	// Votes Routes ======================================================
 	 // Get all votes
