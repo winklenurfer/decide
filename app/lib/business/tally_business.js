@@ -11,6 +11,9 @@ var Vote = require('../../models/votes_model');
 
 // Variables ==========================================================
 var votes;
+var votesParsed;
+var tally = {};
+var winner = false;
 
 // Functions ==========================================================
 
@@ -25,7 +28,7 @@ function tallyElectionResultsById(res, election_id) {
         function(next){
             console.log("getting winner");
             res.send(votes);
-            getWinner(next);
+            getWinner2(next);
         }
     ],
     function (err) {
@@ -58,38 +61,43 @@ function setVotes(election_id, callback) {
     });
 }
 
-//TODO
-function getWinner() {
-    async.series([
-        function(callback){
-            tallyVotes();
+//TODO - Currently calls second series before first finishes. May need to use waterfall.
+function getWinner(callback) {
+    async.waterfall([
+        function(next){
+            tallyVotes(next);
+        },
+        function(next){
+            async.whilst(
+                function () {return !winner;},
+                function (callback) {
+                    newRound(next);
+                    callback();
+                },
+                function (err) {
+                    //save winner
+                }
+            );
             callback();
         }
     ],
-    function (err, results) {
-        async.whilst(
-            function () {return !winner;},
-            function (callback) {
-                newRound();
-                callback();
-            },
-            function (err) {
-                //save winner
+        function (err) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null);
             }
-        );
-    });
+        });
 }
 
 //TODO
 function newRound() {
     async.series([
-        function(callback){
-            dropVotes();
-            callback();
+        function(next){
+            dropVotes(next);
         },
-        function(callback){
-            tallyVotes();
-            callback();
+        function(next){
+            tallyVotes(next);
         }
     ],
     function (err) {
@@ -105,6 +113,8 @@ function newRound() {
 function dropVotes() {
     async.series([
         function(callback){
+            winner = true;
+            console.log("dropVotes");
             //remove all candidates[0] from votes
             callback();
         }
@@ -112,32 +122,137 @@ function dropVotes() {
         function (err) {
             if (err) {
                 res.send(err);
+                callback(err);
             } else {
-                //no error, complete dropVotes
+                callback(null);
             }
         });
 }
 
-//TODO
-function tallyVotes() {
-    async.series([
+function tallyVotes(callback) {
+    async.waterfall([
         function(callback){
             //count all candidates[0]
-            callback();
+            var tally = {};
+            votesParsed = JSON.parse(votes);
+            for (var i = 0; i < votes.length; i++) {
+                if (tally.hasOwnProperty(votes[i].candidates[0])) {
+                    tally[votes[i].candidates[0]] += 1;
+                }
+                else {
+                    tally[votes[i].candidates[0]] = 1;
+                }
+            }
+            callback(null, tally);
         },
-        function(callback){
+        function(tally, callback){
             //check if there is majority winner and set winner
-            callback();
+            console.log(tally);
+            var totalVotes = 0;
+            for (var vote in tally) {
+                totalVotes += tally[vote];
+            }
+            console.log(totalVotes);
+            for (vote in tally) {
+                if ((tally[vote]/totalVotes) > '.5') {
+                    winner = true; //TODO - Set winner and update DB record
+                } else {
+                    console.log("Not majority: " + tally[vote]/totalVotes);
+                }
+            }
+            console.log(totalVotes);
+
+            callback(null);
         }
     ],
-        function (err) {
-            if (err) {
-                res.send(err);
-            } else {
-                //no error, complete tallyVotes
-            }
-        });
+    function (err) {
+        if (err) {
+            res.send(err);
+            callback(err);
+        } else {
+            callback(null);
+        }
+    });
 }
+
+// 2 //
+
+//TODO - Currently calls second series before first finishes. May need to use waterfall.
+function getWinner2(callback) {
+    console.log("getWinner2");
+    tallyVotes2();
+    while (!winner) {
+        newRound2();
+    }
+    callback();
+}
+
+//TODO
+function newRound2() {
+    console.log("newRound2");
+    dropVotes2();
+    tallyVotes2();
+}
+
+//TODO
+function dropVotes2() {
+
+    //TODO NOW - need to find the key where the value is lowest then loop through the votesParsed and splice the first element when it equals the key
+    console.log("dropVotes2");
+    console.log("votesParsed:", votesParsed);
+    console.log("TALLY", tally);
+    var low = '';
+    for (var number in tally) {
+        if (low === '') {
+            low = number;
+        }
+        if (number > low) {
+            low = '';
+        }
+    }
+
+    for (var i = 0; i < votesParsed.length; i++) {
+//        console.log("~~~");
+//        console.log(votesParsed[i].candidates);
+//        votesParsed[i].candidates.splice(0,1);
+//        console.log(votesParsed[i].candidates);
+//        console.log("~~~");
+    }
+
+    winner = true;
+}
+
+function tallyVotes2() {
+    console.log("tallyVotes2");
+    //count all candidates[0]
+    tally = {};
+    votesParsed = JSON.parse(votes);
+    for (var i = 0; i < votesParsed.length; i++) {
+        if (tally.hasOwnProperty(votesParsed[i].candidates[0])) {
+            tally[votesParsed[i].candidates[0]] += 1;
+        }
+        else {
+            tally[votesParsed[i].candidates[0]] = 1;
+        }
+    }
+
+    console.log(tally);
+    var totalVotes = 0;
+    for (var vote in tally) {
+        totalVotes += tally[vote];
+    }
+    console.log(totalVotes);
+    for (vote in tally) {
+        if ((tally[vote]/totalVotes) > '.5') {
+            winner = true; //TODO - Set winner and update DB record
+        } else {
+            console.log("Not majority: " + tally[vote]/totalVotes);
+        }
+    }
+    console.log(totalVotes);
+}
+
+// 2 //
 
 module.exports = {
     tallyElectionResultsById: tallyElectionResultsById
